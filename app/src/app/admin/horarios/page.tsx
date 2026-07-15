@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { AdminLayout } from "@/components/layout/AdminLayout";
 import {
   ArrowLeft,
   CalendarPlus,
@@ -179,9 +180,8 @@ export default function AdminHorariosPage() {
   }
 
   return (
-    <main className="min-h-screen bg-slate-50 px-6 py-8">
-      <section className="mx-auto max-w-7xl">
-        <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
+    <AdminLayout title="Horarios" description="Gestión de horarios">
+      <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
           <div>
             <Link
               href="/admin"
@@ -386,8 +386,7 @@ export default function AdminHorariosPage() {
             )}
           </div>
         </div>
-      </section>
-    </main>
+    </AdminLayout>
   );
 }
 

@@ -5,14 +5,13 @@ import {
   BarChart3,
   CalendarDays,
   Clock,
-  LogOut,
   Bell,
-  Users,
   CheckCircle2,
   AlertCircle,
 } from "lucide-react";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
+import { AdminLayout } from "@/components/layout/AdminLayout";
+
 type ResumenGeneral = {
   totalReservas: number;
   reservasPendientes: number;
@@ -109,85 +108,21 @@ export default function AdminPage() {
     }
   }
 
-  function cerrarSesion() {
-    localStorage.removeItem("token");
-    localStorage.removeItem("usuario");
-    router.push("/login");
-  }
-
   const resumen = reportes?.resumenGeneral;
 
   return (
-    <main className="min-h-screen bg-slate-50">
-      <aside className="fixed left-0 top-0 hidden h-screen w-72 border-r border-slate-200 bg-white p-6 lg:block">
-        <div className="flex items-center gap-3">
-          <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-blue-600 text-white">
-            <CalendarDays size={23} />
-          </div>
-          <div>
-            <h1 className="font-bold text-slate-950">Reservas SDD</h1>
-            <p className="text-xs text-slate-500">Panel administrador</p>
-          </div>
-        </div>
-
-        <nav className="mt-10 space-y-2">
-          {[
-            ["Dashboard", "/admin", BarChart3],
-            ["Agenda", "/admin/agenda", CalendarDays],
-            ["Servicios", "/admin/servicios", CheckCircle2],
-            ["Horarios", "/admin/horarios", Clock],
-            ["Reportes", "/admin/reportes", BarChart3],
-            ["Notificaciones", "/admin/notificaciones", Bell],
-          ].map(([label, href, Icon]: any) => (
-            <Link
-              key={label}
-              href={href}
-              className="flex items-center gap-3 rounded-2xl px-4 py-3 text-sm font-semibold text-slate-700 hover:bg-slate-100"
-            >
-              <Icon size={18} />
-              {label}
-            </Link>
-          ))}
-        </nav>
-
-        <button
-          onClick={cerrarSesion}
-          className="absolute bottom-6 left-6 right-6 flex items-center justify-center gap-2 rounded-2xl bg-slate-950 px-4 py-3 text-sm font-semibold text-white hover:bg-slate-800"
-        >
-          <LogOut size={18} />
-          Cerrar sesión
-        </button>
-      </aside>
-
-      <section className="lg:pl-72">
-        <header className="sticky top-0 z-10 border-b border-slate-200 bg-white/80 px-6 py-4 backdrop-blur">
-          <div className="mx-auto flex max-w-7xl items-center justify-between">
-            <div>
-              <p className="text-sm text-slate-500">Bienvenido</p>
-              <h2 className="text-2xl font-bold text-slate-950">
-                {usuario?.nombre || "Administrador"}
-              </h2>
-            </div>
-
-            <button
-              onClick={cerrarSesion}
-              className="flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50 lg:hidden"
-            >
-              <LogOut size={18} />
-              Salir
-            </button>
-          </div>
-        </header>
-
-        <div className="mx-auto max-w-7xl px-6 py-8">
-          <div className="mb-8">
-            <h3 className="text-3xl font-bold tracking-tight text-slate-950">
-              Dashboard administrativo
-            </h3>
-            <p className="mt-2 text-slate-600">
-              Resumen general de reservas, agenda y actividad del sistema.
-            </p>
-          </div>
+    <AdminLayout
+      title="Bienvenido"
+      description={usuario?.nombre || "Administrador"}
+    >
+      <div className="mb-8">
+        <h3 className="text-3xl font-bold tracking-tight text-slate-950">
+          Dashboard administrativo
+        </h3>
+        <p className="mt-2 text-slate-600">
+          Resumen general de reservas, agenda y actividad del sistema.
+        </p>
+      </div>
 
           {error && (
             <div className="mb-6 flex items-center gap-3 rounded-2xl border border-red-200 bg-red-50 p-4 text-red-700">
@@ -333,9 +268,7 @@ export default function AdminPage() {
               </section>
             </>
           )}
-        </div>
-      </section>
-    </main>
+    </AdminLayout>
   );
 }
 

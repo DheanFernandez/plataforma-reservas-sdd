@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { AdminLayout } from "@/components/layout/AdminLayout";
 import {
   ArrowLeft,
   Bell,
@@ -111,9 +112,8 @@ export default function AdminNotificacionesPage() {
   const notificacionesLeidas = notificaciones.filter((item) => item.leida);
 
   return (
-    <main className="min-h-screen bg-slate-50 px-6 py-8">
-      <section className="mx-auto max-w-7xl">
-        <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
+    <AdminLayout title="Notificaciones" description="Notificaciones internas">
+      <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
           <div>
             <Link
               href="/admin"
@@ -261,8 +261,7 @@ export default function AdminNotificacionesPage() {
             </section>
           </div>
         )}
-      </section>
-    </main>
+    </AdminLayout>
   );
 }
 
