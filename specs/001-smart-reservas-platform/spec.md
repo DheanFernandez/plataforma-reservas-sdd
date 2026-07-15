@@ -24,6 +24,7 @@ Un cliente nuevo debe poder registrarse en la plataforma y acceder con credencia
 2. **Given** un usuario con credenciales válidas, **When** intenta iniciar sesión, **Then** el sistema autentica la sesión y redirige según su rol.
 3. **Given** un usuario con credenciales inválidas, **When** intenta iniciar sesión, **Then** el sistema rechaza la autenticación y muestra un mensaje de error claro.
 
+4. **Given** un visitante nuevo en la pantalla de login, **When** abre el formulario, **Then** los campos de correo y contraseña aparecen vacíos y no se exponen credenciales administrativas ni de prueba en el frontend.
 ---
 
 ### User Story 2 - Gestión de servicios y horarios por parte del administrador (Priority: P1)
@@ -90,6 +91,7 @@ El administrador debe poder gestionar el estado de las reservas, consultar una a
 
 - **FR-001**: The system MUST allow a client to register with valid personal data and create an account using email and password.
 - **FR-002**: The system MUST allow an administrator and a client to start a session with valid credentials.
+- **FR-002A**: The login form MUST initialize the email and password fields as empty values, without hardcoded administrative or test credentials in the frontend, and the browser or password manager MUST control the autocomplete behavior.
 - **FR-003**: The system MUST enforce role-based access control so that administrators can manage business resources and clients can access only their own reservations.
 - **FR-004**: The system MUST allow administrators to create, edit and delete services.
 - **FR-005**: Each service MUST include a name, description, duration in minutes, price and an active/inactive status.
